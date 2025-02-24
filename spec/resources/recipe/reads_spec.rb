@@ -23,7 +23,7 @@ RSpec.describe RecipeResource, type: :resource do
         params[:filter] = { id: { eq: recipe2.id } }
       end
 
-      it 'works' do
+      it 'returns proper response' do
         render
         expect(d.map(&:id)).to eq([recipe2.id])
       end
@@ -37,7 +37,21 @@ RSpec.describe RecipeResource, type: :resource do
         params[:filter] = { category_id: { eq: category.id } }
       end
 
-      it 'works' do
+      it 'returns filtered response' do
+        render
+        expect(d.map(&:id)).to eq([recipe1.id])
+      end
+    end
+
+    context 'by category_name' do
+      let(:category) { create(:category) }
+
+      before do
+        recipe1.categories << category
+        params[:filter] = { category_name: { eq: category.name } }
+      end
+
+      it 'returns filtered response' do
         render
         expect(d.map(&:id)).to eq([recipe1.id])
       end

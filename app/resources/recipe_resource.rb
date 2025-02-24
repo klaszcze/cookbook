@@ -17,4 +17,12 @@ class RecipeResource < ApplicationResource
         .where(recipe_categories: { category_id: value })
     end
   end
+
+  filter :category_name, :string do
+    eq do |scope, value|
+      scope
+        .includes(:categories)
+        .where(categories: { name: value })
+    end
+  end
 end

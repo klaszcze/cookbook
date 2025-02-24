@@ -43,4 +43,26 @@ RSpec.describe 'recipes#index', type: :request do
       expect(d.map(&:id)).to match_array([recipe1.id, recipe3.id])
     end
   end
+
+  describe 'filter by category_name' do
+    let!(:recipe1) { create(:recipe) }
+    let!(:recipe2) { create(:recipe) }
+    let!(:recipe3) { create(:recipe) }
+    let!(:category1) { create(:category, name: 'Mexican') }
+    let!(:category2) { create(:category, name: 'Vegetarian') }
+
+    let(:params) { { filter: { category_name: { eq: 'Vegetarian' } } } }
+
+    before do
+      recipe1.categories << category1
+      recipe3.categories << [category1, category2]
+    end
+
+    it 'returns filtered response' do
+      make_request
+      expect(response.status).to eq(200), response.body
+      expect(d.map(&:jsonapi_type).uniq).to match_array(['recipes'])
+      expect(d.map(&:id)).to match_array([recipe3.id])
+    end
+  end
 end

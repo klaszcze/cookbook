@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_21_103413) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_24_104530) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.string "bio"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_21_103413) do
     t.string "group"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name"
   end
 
   create_table "likes", force: :cascade do |t|
