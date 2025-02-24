@@ -500,13 +500,7 @@
         "index": {
           "resource": "LikeResource"
         },
-        "show": {
-          "resource": "LikeResource"
-        },
         "create": {
-          "resource": "LikeResource"
-        },
-        "update": {
           "resource": "LikeResource"
         },
         "destroy": {
