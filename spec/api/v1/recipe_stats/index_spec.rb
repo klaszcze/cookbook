@@ -15,9 +15,8 @@ RSpec.describe 'recipe_stats#index', type: :request do
     let(:author2) { create(:author) }
     let(:user1) { author1.user }
     let(:user2) { author2.user }
-    let(:category1) { create(:category) }
-    let(:category2) { create(:category) }
-    let(:category3) { create(:category) }
+    let(:category1) { create(:category, name: 'Vegan') }
+    let(:category2) { create(:category, name: 'Mexican') }
 
     let!(:recipe1) { create(:recipe, author: author1, created_at: Date.parse('23.02.2025'), categories: [category1]) }
     let!(:recipe2) do
