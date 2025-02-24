@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RecipeResource < ApplicationResource
   attribute :title, :string
   attribute :text, :string
@@ -7,4 +9,12 @@ class RecipeResource < ApplicationResource
 
   belongs_to :author
   many_to_many :categories
+
+  filter :category_id, :integer_id do
+    eq do |scope, value|
+      scope
+        .includes(:recipe_categories)
+        .where(recipe_categories: { category_id: value })
+    end
+  end
 end

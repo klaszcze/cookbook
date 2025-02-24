@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RecipeResource, type: :resource do
@@ -26,6 +28,20 @@ RSpec.describe RecipeResource, type: :resource do
         expect(d.map(&:id)).to eq([recipe2.id])
       end
     end
+
+    context 'by category_id' do
+      let(:category) { create(:category) }
+
+      before do
+        recipe1.categories << category
+        params[:filter] = { category_id: { eq: category.id } }
+      end
+
+      it 'works' do
+        render
+        expect(d.map(&:id)).to eq([recipe1.id])
+      end
+    end
   end
 
   describe 'sorting' do
@@ -41,9 +57,9 @@ RSpec.describe RecipeResource, type: :resource do
         it 'works' do
           render
           expect(d.map(&:id)).to eq([
-            recipe1.id,
-            recipe2.id
-          ])
+                                      recipe1.id,
+                                      recipe2.id
+                                    ])
         end
       end
 
@@ -55,9 +71,9 @@ RSpec.describe RecipeResource, type: :resource do
         it 'works' do
           render
           expect(d.map(&:id)).to eq([
-            recipe2.id,
-            recipe1.id
-          ])
+                                      recipe2.id,
+                                      recipe1.id
+                                    ])
         end
       end
     end
