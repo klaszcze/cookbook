@@ -240,6 +240,75 @@
       }
     },
     {
+      "name": "LikeResource",
+      "type": "likes",
+      "graphql_entrypoint": "likes",
+      "description": null,
+      "attributes": {
+        "id": {
+          "type": "integer_id",
+          "readable": true,
+          "writable": true,
+          "description": null
+        },
+        "user_id": {
+          "type": "string",
+          "readable": true,
+          "writable": true,
+          "description": null
+        }
+      },
+      "extra_attributes": {
+      },
+      "sorts": {
+        "id": {
+        },
+        "user_id": {
+        }
+      },
+      "filters": {
+        "id": {
+          "type": "integer_id",
+          "operators": [
+            "eq",
+            "not_eq",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "user_id": {
+          "type": "integer",
+          "operators": [
+            "eq",
+            "not_eq",
+            "eql",
+            "not_eql",
+            "prefix",
+            "not_prefix",
+            "suffix",
+            "not_suffix",
+            "match",
+            "not_match"
+          ],
+          "required": true
+        }
+      },
+      "relationships": {
+        "recipe": {
+          "type": "belongs_to",
+          "description": null,
+          "resource": "RecipeResource"
+        }
+      },
+      "stats": {
+        "total": [
+          "count"
+        ]
+      }
+    },
+    {
       "name": "RecipeResource",
       "type": "recipes",
       "graphql_entrypoint": "recipes",
@@ -423,6 +492,25 @@
       "actions": {
         "index": {
           "resource": "CategoryResource"
+        }
+      }
+    },
+    "/api/v1/likes": {
+      "actions": {
+        "index": {
+          "resource": "LikeResource"
+        },
+        "show": {
+          "resource": "LikeResource"
+        },
+        "create": {
+          "resource": "LikeResource"
+        },
+        "update": {
+          "resource": "LikeResource"
+        },
+        "destroy": {
+          "resource": "LikeResource"
         }
       }
     },
