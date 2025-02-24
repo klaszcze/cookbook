@@ -18,7 +18,7 @@ class RecipeResource < ApplicationResource
     end
   end
 
-  filter :category_name, :string,  only: :eq do
+  filter :category_name, :string, only: :eq do
     eq do |scope, value|
       scope
         .includes(:categories)
